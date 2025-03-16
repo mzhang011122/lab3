@@ -228,15 +228,12 @@ module fir #(
                 ADDR_AP_CTRL: begin
                     if (wdata == 32'h0000_0001)
                     int_ap_start <= 1'b1; // Start the FIR process
-                    int_ap_idle <= 1'b0;  // Clear idle signal
-                 
+                    int_ap_idle <= 1'b0;  // Clear idle signal  
                 end
                 ADDR_datalength: begin
                     data_length <= wdata; // Update data length
-               
                 end
                 default: begin
-                 
                 end
             endcase
         end
@@ -246,7 +243,6 @@ module fir #(
     reg int_ap_start;
     reg int_task_ap_done;
     reg int_ap_idle;
-    
     always @(*) begin
     case (araddr)
     ADDR_AP_CTRL: begin
@@ -271,7 +267,7 @@ module fir #(
             ar_ready<=1'b1;            // Set read address ready signal
         end else if ( ~r_valid && arvalid) begin
             r_valid <= ~r_valid;       // Toggle read valid signal
-        end else if (rready && r_valid) begin
+        end else if (rready && r_valid) begin    
             r_valid <= 1'b0;           // Clear read valid signal
         end
     end
